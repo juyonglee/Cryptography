@@ -3,6 +3,8 @@ package com.google.juyonglee0208;
 import static org.junit.Assert.fail;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
@@ -16,6 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.google.juyonglee0208.config.RootConfig;
+import com.mysql.cj.xdevapi.DatabaseObject;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -31,6 +34,16 @@ public class DatabaseTest {
 	
 	@Setter(onMethod_ = @Autowired)
 	private SqlSessionFactory sqlSessionFatory;
+	
+	@Test
+	public void mysqlConnectionTest() {
+		try {
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost", "root", "0000");
+			log.info(connection);
+		} catch (SQLException e) {
+			fail(e.getMessage());
+		}
+	}
 	
 	@Test
 	public void connectionTest() {
