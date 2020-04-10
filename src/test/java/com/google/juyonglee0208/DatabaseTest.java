@@ -46,6 +46,16 @@ public class DatabaseTest {
 	}
 	
 	@Test
+	public void hikiriConnectionTest() {
+		try {
+			Connection connection = dataSource.getConnection();
+			log.info(connection);
+		} catch (SQLException e) {
+			log.info(e.getMessage());
+		}
+	}
+	
+	@Test
 	public void connectionTest() {
 		try(SqlSession session = sqlSessionFatory.openSession();
 				Connection con = session.getConnection();) {
